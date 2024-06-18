@@ -1,7 +1,10 @@
 #!/bin/bash
-# set -e は「エラーが発生するとスクリプトを終了する」オプション
 set -e
 
-# exec "$@"でCMDで渡されたコマンドを実行。(→rails s)
-# コンテナのプロセスを実行する。（Dockerfile 内の CMD に設定されているもの。）
+# Remove a potentially pre-existing server.pid for Rails.
+rm -f /app/tmp/pids/server.pid
+
+# データベースの準備（デフォルトではRailsサーバを起動する前に実行）
+bundle exec rails db:prepare
+
 exec "$@"
