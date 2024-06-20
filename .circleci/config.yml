@@ -1,0 +1,39 @@
+version: 2.1
+
+executors:
+  default:
+    docker:
+      - image: circleci/ruby:3.1-node-browsers
+    working_directory: ~/app
+
+jobs:
+  build:
+    executor: default
+    steps:
+      - checkout
+
+      # Install dependencies
+      - run:
+          name: Install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+      # Database setup (if needed)
+      # - run:
+      #     name: Database setup
+      #     command: |
+      #       bundle exec rails db:create
+      #       bundle exec rails db:schema:load
+      #       bundle exec rails db:test:prepare
+
+      # Run tests
+      - run:
+          name: Run tests
+          command: |
+            bundle exec rspec
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
