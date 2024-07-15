@@ -2,6 +2,11 @@
 
 <p><%= @article.body %></p>
 
+<% if @article.youtube_id.present? %>
+  <h2>動画</h2>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @article.youtube_id %>" frameborder="0" allowfullscreen></iframe>
+<% end %>
+
 <ul>
   <li><%= link_to "Edit", edit_article_path(@article) %></li>
   <li><%= link_to "Destroy", article_path(@article), data: {
