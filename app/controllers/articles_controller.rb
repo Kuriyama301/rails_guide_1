@@ -46,6 +46,6 @@ class ArticlesController < ApplicationController
   private
 
   def article_params
-    params.require(:article).permit(:title, :body, :status, :youtube_url)
+    params.require(:article).permit(:title, :body, :status, :embed_type, :embed_url)
   end
 end

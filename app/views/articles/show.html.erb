@@ -2,9 +2,9 @@
 
 <p><%= @article.body %></p>
 
-<% if @article.youtube_id.present? %>
-  <h2>動画</h2>
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @article.youtube_id %>" frameborder="0" allowfullscreen></iframe>
+<% if @article.embed_content.present? %>
+  <h2>埋め込みコンテンツ</h2>
+  <%= @article.embed_content.html_safe %>
 <% end %>
 
 <ul>
